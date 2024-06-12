@@ -31,14 +31,14 @@ function SignUp() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(data);
-        /*
         register(data)
             .then((response) => {
                 console.log(response);
-                navigate('/login');
+                if (response.status === 201) {
+                    navigate('/login');
+                }
             })
             .catch((error) => { console.error(error) });
-        */
     };
 
     const handleInputChange = (event) => {
@@ -176,7 +176,7 @@ function SignUp() {
                         <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Typography component="p" variant="body2">
-                                    Already have an account? <Link href="/signin" >Sign in</Link>
+                                    Already have an account? <Link href="/login" >Sign in</Link>
                                 </Typography>
                             </Grid>
                         </Grid>

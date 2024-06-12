@@ -6,9 +6,9 @@ import 'styles/styles.css';
 import 'styles/customStyles.css';
 
 // components import
-import Home from 'components/Home';
-import SignIn from 'components/SignIn'
-import SignUp from 'components/SignUp'
+import Home from 'pages/Home';
+import SignIn from 'pages/SignIn'
+import SignUp from 'pages/SignUp'
 //import RequireAuth from 'components/RequireAuth';
 import reportWebVitals from 'reportWebVitals';
 

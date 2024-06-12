@@ -62,16 +62,11 @@ class Crud():
             }
             return Response(data, status=status.HTTP_404_NOT_FOUND)
 
-    def list(self, request, field_filter, fieldId):
+    def list(self, request, fieldId):
         """ Returns a JSON response containing registered users"""
-        if(field_filter == "project"):
-            queryset = self.model_class.objects.filter(
-                id_project=fieldId).order_by('id')
-            result = self.serializer_class(queryset, many=True)
-        else:
-            queryset = self.model_class.objects.filter(
-                user_id=fieldId).order_by('id')
-            result = self.serializer_class(queryset, many=True)
+        queryset = self.model_class.objects.filter(
+            user_id=fieldId).order_by('id')
+        result = self.serializer_class(queryset, many=True)
 
         data = {
             'success': True,

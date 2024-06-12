@@ -3,7 +3,7 @@ import {
 } from 'utils';
 
 export const login = (data) => {
-    fetch(`${API_URL}/users/login/`, {
+    return fetch(`${API_URL}/users/login/`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -22,8 +22,7 @@ export const register = (data) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            'is_staff': String(true),
-            'username': String(data.personalId),
+            'username': String(data.personalId).replaceAll(".", ""),
             'first_name': String(data.firstName),
             'last_name': String(data.lastName),
             'email': String(data.email),

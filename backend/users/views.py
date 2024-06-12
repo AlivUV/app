@@ -31,11 +31,32 @@ class UserViewSet(viewsets.GenericViewSet):
 
     @action(detail=False, methods=['post'])
     def signup(self, request):
+        print(request.data)
+
         serializer = UserSignUpSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
         data = UserModelSerializer(user).data
         return Response(data, status=status.HTTP_201_CREATED)
+    
+    @action(detail=False, methods=['put'])
+    def updateUser(self, request):
+        user = User.objects.get(username=request.data['username'])
+        oldData = UserModelSerializer(user).data
+        request.data['password'] = oldData['password']
+        request.data['is_staff'] = oldData['is_staff']
+        serializer = UserModelSerializer(user, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response({
+                'username': request.data['username'],
+                'first_name': request.data['first_name'],
+                'last_name': request.data['last_name'],
+                'email': request.data['email']
+            },status=status.HTTP_200_OK)
+        
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])
