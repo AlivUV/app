@@ -7,12 +7,13 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 # Views
-from users import views as user_views
+from users import views
 
 router = DefaultRouter()
-router.register(r'users', user_views.UserViewSet, basename='users')
+router.register(r'users', views.UserViewSet, basename='users')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('user/firstName/<str:username>', user_views.getFullName, name='getFullName'),
+    path('user/get/firstName/<str:username>', views.getFullName, name='getFullName'),
+    path('user/get/byId/<str:userId>', views.getFullName, name='getFullName')
 ]

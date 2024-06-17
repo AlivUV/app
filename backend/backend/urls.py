@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+apiname = 'backend'
+
+version = 'v1'
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include(('users.urls', 'users'), namespace='users')),
-    path('assistant/', include(('assistant.urls', 'assistant'), namespace='assistant'))
+    path(f'{apiname}/{version}/admin/', admin.site.urls),
+    path(f'{apiname}/{version}/', include(('users.urls', 'users'), namespace='users')),
+    path(f'{apiname}/{version}/', include(('applicants.urls', 'applicants'), namespace='applicants')),
+    path(f'{apiname}/{version}/assistant/', include(('assistant.urls', 'assistant'), namespace='assistant'))
 ]

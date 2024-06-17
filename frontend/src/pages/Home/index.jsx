@@ -1,5 +1,5 @@
 // React imports
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // MUI components
 import { CssBaseline, Box, Toolbar, Container, Grid, Paper } from '@mui/material';
@@ -10,6 +10,9 @@ import { Drawer } from 'components/Home/Drawer';
 import { DropZone } from 'components/Home/DropZone';
 import { StudentsList } from 'components/Home/StudentsList';
 
+// Services
+import { getIdData, getIcfesData } from 'services/AssistantService'
+
 
 function Home() {
     const [open, setOpen] = useState(false);
@@ -18,6 +21,23 @@ function Home() {
     const toggleDrawer = () => {
         setOpen(!open);
     };
+
+
+    useEffect(() => {
+        if (!idFile)
+            return;
+
+        console.log(idFile);
+    }, [idFile])
+
+
+    useEffect(() => {
+        if (!icfesFile)
+            return;
+
+        console.log(icfesFile);
+    }, [icfesFile])
+
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -38,12 +58,12 @@ function Home() {
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={12} lg={6}>
                             <Paper sx={{ position: 'relative', textAlign: 'center', margin: 'auto', padding: '1em' }} >
-                                <DropZone title="Documento de identificación" fileState={[idFile, setIdFile]} />
+                                <DropZone title="Documento de identificación" fileState={[idFile, setIdFile]} extractDataFunction={getIdData} />
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={12} lg={6}>
                             <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                                <DropZone title="Resultados ICFES" fileState={[icfesFile, setIcfesFile]} />
+                                <DropZone title="Resultados ICFES" fileState={[icfesFile, setIcfesFile]} extractDataFunction={getIcfesData} />
                             </Paper>
                         </Grid>
                         <Grid item xs={12}>

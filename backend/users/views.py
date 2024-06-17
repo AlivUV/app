@@ -61,7 +61,18 @@ class UserViewSet(viewsets.GenericViewSet):
 
 @api_view(['GET'])
 def getFullName(request, username):
-    modelUser = User.objects.get(id=username)
+    modelUser = User.objects.get(username=username)
+    user = UserModelSerializer(modelUser).data
+    userData = {
+        'firstName': user['first_name'],
+        'lastName': user['last_name']
+    }
+    return Response(user, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def getFullName(request, userId):
+    modelUser = User.objects.get(id=userId)
     user = UserModelSerializer(modelUser).data
     userData = {
         'firstName': user['first_name'],

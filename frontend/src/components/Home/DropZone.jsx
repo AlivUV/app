@@ -1,5 +1,5 @@
 import { Title } from 'components/Home/Title'
-import { gemini } from 'services/AssistantService'
+
 
 function DropZone(props) {
     const [fileState, setFileState] = props.fileState;
@@ -15,8 +15,8 @@ function DropZone(props) {
         if (/image\/*|application\/pdf/.test(file.type)) {
             let reader = new FileReader()
             reader.onload = e => {
-                gemini(e.target.result.split(',')[1])
-                    .then(data => { setFileState({ ...file, ...data }); })
+                props.extractDataFunction(e.target.result.split(',')[1])
+                    .then(data => { setFileState(state => ({ ...state, ...data })) })
             };
             reader.onerror = (err) => console.log(err);
             reader.readAsDataURL(file);

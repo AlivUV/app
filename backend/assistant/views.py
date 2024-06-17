@@ -13,7 +13,7 @@ from django.core.exceptions import ImproperlyConfigured
 
 env = environ.Env()
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
@@ -39,11 +39,9 @@ def geminiImage(request):
     model = genai.GenerativeModel('gemini-pro-vision')
 
     response = model.generate_content([
-        'Entregame los datos de esta imagen en un json de la forma ```json{"numeroIdentificacion": "0.000.000.000", "nombres": "Nombres", "apellidos": "Apellidos"}```'
-        , body['image']], stream=True)
+        body['prompt'],
+        body['image']], stream=True)
     response.resolve()
-
-    print(response)
 
     responseData = response.text.split('```')
 

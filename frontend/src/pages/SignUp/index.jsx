@@ -12,6 +12,7 @@ import { DropZone } from 'components/Home/DropZone';
 
 // Services
 import { register } from 'services/UserService';
+import { getIdData } from 'services/AssistantService'
 
 
 const defaultTheme = createTheme();
@@ -87,7 +88,7 @@ function SignUp() {
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
-                                <DropZone title="Upload id document" fileState={[idFile, setIdFile]} />
+                                <DropZone title="Upload id document" fileState={[idFile, setIdFile]} extractDataFunction={getIdData} />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
