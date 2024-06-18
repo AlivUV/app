@@ -6,9 +6,10 @@ import 'styles/styles.css';
 import 'styles/customStyles.css';
 
 // components import
-import Home from 'components/Home';
+//import Home from 'components/Home';
 import SignIn from 'components/SignIn'
 import SignUp from 'components/SignUp'
+import LandingPage from 'pages/LandingPage';
 //import RequireAuth from 'components/RequireAuth';
 import reportWebVitals from 'reportWebVitals';
 
@@ -21,7 +22,7 @@ root.render(
       <Route exact path="/signup" element={<SignUp />}></Route>
 
       {/* User */}
-      <Route exact path="/" element={/*<RequireAuth>*/<Home />/*</RequireAuth>*/}></Route>
+      <Route exact path="/" element={/*<RequireAuth>*/<LandingPage />/*</RequireAuth>*/}></Route>
     </Routes>
   </BrowserRouter>
 );
