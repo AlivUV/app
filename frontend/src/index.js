@@ -8,8 +8,9 @@ import 'styles/customStyles.css';
 // components import
 //import Home from 'components/Home';
 import SignIn from 'components/SignIn'
-import SignUp from 'components/SignUp'
+//import SignUp from 'components/SignUp'
 import LandingPage from 'pages/LandingPage';
+import SignUp from 'pages/SignUp';
 //import RequireAuth from 'components/RequireAuth';
 import reportWebVitals from 'reportWebVitals';
 

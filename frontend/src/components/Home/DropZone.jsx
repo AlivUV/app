@@ -1,5 +1,4 @@
 import { Title } from 'components/Home/Title'
-import { gemini } from 'services/AssistantService'
 
 function DropZone(props) {
     const [fileState, setFileState] = props.fileState;
@@ -15,8 +14,7 @@ function DropZone(props) {
         if (/image\/*|application\/pdf/.test(file.type)) {
             let reader = new FileReader()
             reader.onload = e => {
-                gemini(e.target.result.split(',')[1])
-                    .then(data => { setFileState({ ...file, ...data }); })
+                console.log("HOLI")
             };
             reader.onerror = (err) => console.log(err);
             reader.readAsDataURL(file);
@@ -27,7 +25,7 @@ function DropZone(props) {
 
 
     return (
-        <label style={{ position: 'relative', textAlign: 'center', borderStyle: 'dashed', borderRadius: '2em', margin: 'auto', padding: '1em' }}>
+        <label style={{ position: 'relative', textAlign: 'center', borderStyle: 'dashed', borderRadius: '3em', margin: 'auto', padding: '1em' }}>
             <Title>{props.title}</Title>
             {
                 (!fileState)
@@ -35,12 +33,12 @@ function DropZone(props) {
                         <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                     </svg>
                     : <>
-                        <img src={fileState.url} alt={fileState.name} style={{ maxWidth: '100%', maxHeight: '300px ' }} />
+                        <img src={fileState.url} alt={fileState.name} style={{ maxWidth: '100%', maxHeight: '100px ' }} />
                         <br />
                         <label style={{ color: 'gray' }}>{fileState.name}</label>
                     </>
             }
-            <p>Upload or drag & drop your image or PDF file. </p>
+            <p>Cargue o arrastre su imagen o archivo PDF. </p>
             <input type="file" accept="image/*" onChange={handleChange}
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', maxWidth: '100%', maxHeight: '100%', opacity: 0 }} />
         </label>

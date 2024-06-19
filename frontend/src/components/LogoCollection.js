@@ -40,7 +40,7 @@ export default function LogoCollection() {
         align="center"
         color="text.secondary"
       >
-        Con la confianza de las mejores empresas
+        Desarrollado con las mejores tecnologías
       </Typography>
       <Grid container justifyContent="center" sx={{ mt: 4, opacity: 0.8 }}>
         {logos.map((logo, index) => (
