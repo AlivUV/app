@@ -235,6 +235,8 @@ export default function SignUp() {
                 sx={{
                   width: '100%',
                   height: 40,
+                  '& .MuiStepIcon-root.Mui-active': { color: '#7FADE8' },
+                  '& .MuiStepIcon-root.Mui-completed': { color: '#7FADE8' },
                 }}
               >
                 {steps.map((label) => (
@@ -267,7 +269,11 @@ export default function SignUp() {
               id="mobile-stepper"
               activeStep={activeStep}
               alternativeLabel
-              sx={{ display: { sm: 'flex', md: 'none' } }}
+              sx={{
+                display: { sm: 'flex', md: 'none' },
+                '& .MuiStepIcon-root.Mui-active': { color: 'blue' },
+                '& .MuiStepIcon-root.Mui-completed': { color: 'blue' },
+              }}
             >
               {steps.map((label) => (
                 <Step

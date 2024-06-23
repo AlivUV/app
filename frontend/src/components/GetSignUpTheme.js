@@ -569,7 +569,7 @@ export default function GetSignUpTheme(mode) {
         styleOverrides: {
           line: ({ theme }) => ({
             borderTop: '1px solid',
-            borderColor: theme.palette.divider,
+            borderColor: 'theme.palette.divider',
             flex: 1,
             borderRadius: '99px',
           }),
@@ -579,7 +579,8 @@ export default function GetSignUpTheme(mode) {
         styleOverrides: {
           label: ({ theme }) => ({
             '&.Mui-completed': {
-              opacity: 0.4,
+              color: '#7FADE8',
+              opacity: 0.9,
               ...(theme.palette.mode === 'dark' && { opacity: 0.3 }),
             },
           }),
@@ -592,7 +593,7 @@ export default function GetSignUpTheme(mode) {
             style: () => ({
               width: 12,
               height: 12,
-              color: 'white'
+              color: '#7FADE8'
             }),
           },
         ],
