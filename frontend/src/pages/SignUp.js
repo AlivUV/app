@@ -9,14 +9,11 @@ import Stack from '@mui/material/Stack';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 
@@ -29,6 +26,7 @@ import ToggleColorMode2 from 'components/ToggleColorMode2';
 import AdditionalInformation from 'components/AdditionalInformation';
 import End from 'components/End';
 
+{/*
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
     <Box
@@ -70,15 +68,18 @@ ToggleCustomTheme.propTypes = {
   }).isRequired,
   toggleCustomTheme: PropTypes.func.isRequired,
 };
+*/}
 
 const steps = ['Sube tus documentos', 'Información adicional', 'finalizar'];
 
+{/*
 const logoStyle = {
   width: '140px',
   height: '56px',
   marginLeft: '-4px',
   marginRight: '-8px',
 };
+*/}
 
 function getStepContent(step) {
   switch (step) {
@@ -104,9 +105,6 @@ export default function SignUp() {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const toggleCustomTheme = () => {
-    setShowCustomTheme((prev) => !prev);
-  };
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -212,7 +210,7 @@ export default function SignUp() {
               <Button
                 startIcon={<ArrowBackRoundedIcon />}
                 component="a"
-                href="/material-ui/getting-started/templates/landing-page/"
+                href="/"
                 sx={{ alignSelf: 'start' }}
               >
                 Regresar al inicio

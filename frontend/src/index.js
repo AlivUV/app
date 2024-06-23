@@ -7,10 +7,11 @@ import 'styles/customStyles.css';
 
 // components import
 //import Home from 'components/Home';
-import SignIn from 'components/SignIn'
+//import SignIn from 'components/SignIn'
 //import SignUp from 'components/SignUp'
 import LandingPage from 'pages/LandingPage';
 import SignUp from 'pages/SignUp';
+import SignIn from 'pages/SignIn';
 //import RequireAuth from 'components/RequireAuth';
 import reportWebVitals from 'reportWebVitals';
 
