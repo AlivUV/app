@@ -17,11 +17,8 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 
-//import AddressForm from './AddressForm';
 import GetSignUpTheme from 'components/GetSignUpTheme';
-//import InfoMobile from './InfoMobile';
 import UploadDocuments from 'components/UploadDocuments';
-//import Review from './Review';
 import ToggleColorMode2 from 'components/ToggleColorMode2';
 import AdditionalInformation from 'components/AdditionalInformation';
 import End from 'components/End';
@@ -71,15 +68,6 @@ ToggleCustomTheme.propTypes = {
 */}
 
 const steps = ['Sube tus documentos', 'Información adicional', 'finalizar'];
-
-{/*
-const logoStyle = {
-  width: '140px',
-  height: '56px',
-  marginLeft: '-4px',
-  marginRight: '-8px',
-};
-*/}
 
 function getStepContent(step) {
   switch (step) {

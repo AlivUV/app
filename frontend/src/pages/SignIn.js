@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import GetSignUpTheme from 'components/GetSignUpTheme';
 
 function Copyright(props) {
   return (
@@ -24,11 +25,12 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+{/*const defaultTheme = createTheme();*/ }
 
 export default function SignIn() {
+  const [mode, setMode] = React.useState('light');
+  const checkoutTheme = createTheme(GetSignUpTheme(mode));
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -39,7 +41,7 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={checkoutTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -82,6 +84,14 @@ export default function SignIn() {
                 name="Identificación"
                 autoComplete="identificacion"
                 autoFocus
+                InputLabelProps={{
+                  sx: {
+                    transform: 'translate(14px, 12px) scale(1)',
+                    '&.Mui-focused': {
+                      transform: 'translate(12px, -20px) scale(0.85)',
+                    },
+                  },
+                }}
               />
               <TextField
                 margin="normal"
@@ -92,18 +102,28 @@ export default function SignIn() {
                 type="password"
                 id="contraseña"
                 autoComplete="current-password"
+                InputLabelProps={{
+                  sx: {
+                    transform: 'translate(14px, 12px) scale(1)',
+                    '&.Mui-focused': {
+                      transform: 'translate(12px, -20px) scale(0.85)',
+                    },
+                  },
+                }}
+                sx={{
+                  mt: 3,
+                }}
               />
-
               <Button
                 type="submit"
                 fullWidth
+                href="/dashboard"
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Iniciar sesión
               </Button>
               <Grid container>
-
                 <Grid item>
                   <Link href="/signup" variant="body2">
                     {"¿No tienes una cuenta? Registrate"}

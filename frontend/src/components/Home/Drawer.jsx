@@ -1,14 +1,12 @@
 // MUI components
-import { Toolbar, List, Divider, IconButton, Drawer as MuiDrawer } from '@mui/material';
-import { ChevronLeft as ChevronLeftIcon } from '@mui/icons-material';
+import { Toolbar, List, Divider, IconButton, Drawer as MuiDrawer, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { ChevronLeft as ChevronLeftIcon, ExitToApp as ExitToAppIcon } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
 // Custom components
 import { mainListItems } from 'components/Home/ListItems';
 
-
 const drawerWidth = 240;
-
 
 const DrawerStyled = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -36,7 +34,6 @@ const DrawerStyled = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== '
     }),
 );
 
-
 function Drawer(props) {
     return (
         <DrawerStyled variant={props.variant} open={props.open}>
@@ -46,6 +43,15 @@ function Drawer(props) {
             <Divider />
             <List component="nav">
                 {mainListItems}
+            </List>
+            <Divider />
+            <List component="nav" sx={{ mt: 'auto' }}>
+                <ListItemButton onClick={props.handleLogout}>
+                    <ListItemIcon>
+                        <ExitToAppIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Cerrar sesión" />
+                </ListItemButton>
             </List>
         </DrawerStyled>
     )

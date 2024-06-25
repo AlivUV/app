@@ -9,6 +9,7 @@ import { AppBar } from 'components/Home/AppBar';
 import { Drawer } from 'components/Home/Drawer';
 import { DropZone } from 'components/Home/DropZone';
 import { StudentsList } from 'components/Home/StudentsList';
+import AdminRegistration from 'components/AdminRegistration';
 
 
 function Home() {
@@ -27,7 +28,7 @@ function Home() {
             <Box
                 component="main"
                 sx={{
-                    backgroundColor: (theme) => theme.palette.grey[100],
+                    backgroundColor: 'white',
                     flexGrow: 1,
                     height: '100vh',
                     overflow: 'auto',
@@ -35,6 +36,8 @@ function Home() {
             >
                 <Toolbar />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                    <AdminRegistration />
+                    {/*
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={12} lg={6}>
                             <Paper sx={{ position: 'relative', textAlign: 'center', margin: 'auto', padding: '1em' }} >
@@ -51,7 +54,7 @@ function Home() {
                                 <StudentsList />
                             </Paper>
                         </Grid>
-                    </Grid>
+                    </Grid>*/}
                 </Container>
             </Box>
         </Box>
