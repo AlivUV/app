@@ -42,7 +42,7 @@ function Drawer(props) {
             </Toolbar>
             <Divider />
             <List component="nav">
-                {mainListItems}
+                {mainListItems(props.setCurrentContent)}
             </List>
             <Divider />
             <List component="nav" sx={{ mt: 'auto' }}>

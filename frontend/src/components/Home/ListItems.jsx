@@ -5,15 +5,15 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import GroupAddRoundedIcon from '@mui/icons-material/GroupAddRounded';
 
-export const mainListItems = (
+export const mainListItems = (setCurrentContent) => (
   <>
-    <ListItemButton>
+    <ListItemButton onClick={() => setCurrentContent('AdminRegistration')}>
       <ListItemIcon>
         <GroupAddRoundedIcon />
       </ListItemIcon>
       <ListItemText primary="Registrar usuario" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton onClick={() => setCurrentContent('StudentsList')}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
