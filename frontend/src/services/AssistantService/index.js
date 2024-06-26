@@ -14,18 +14,20 @@ const fetcher = (model, body) => {
 }
 
 
-export const getIdData = (image) => {
+export const getIdData = (file, fileType) => {
     const body = JSON.stringify({
         prompt: 'Entregame los datos de esta imagen en un json de la forma ```json{"numeroIdentificacion": "0.000.000.000", "nombres": "Nombres", "apellidos": "Apellidos"}```',
-        image: image
+        file: file,
+        fileType: fileType
     })
     return fetcher("gemini", body)
 }
 
-export const getIcfesData = (image) => {
+export const getIcfesData = (file, fileType) => {
     const body = JSON.stringify({
         prompt: 'Entregame los datos de esta imagen en un json de la forma ```json{"numeroIdentificacion": "0000000000", "puntajeGlobal": "000", "lecturaCritica": "00", "matematicas": "00", "socialesYCiudadanas": "00", "cienciasNaturales": "00", "ingles": "00"}```',
-        image: image
+        file: file,
+        fileType: fileType
     })
     return fetcher("gemini", body)
 }

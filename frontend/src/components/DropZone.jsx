@@ -1,8 +1,8 @@
 import { Title } from 'components/Home/Title'
 
 
-function DropZone(props) {
-    const [fileState, setFileState] = props.fileState;
+function DropZone({ propFileState, extractDataFunction, title }) {
+    const [fileState, setFileState] = propFileState;
 
     const handleChange = ({ target }) => {
         let file = target.files[0];
@@ -12,27 +12,33 @@ function DropZone(props) {
             return
         }
 
-        if (/image\/*|application\/pdf/.test(file.type)) {
-            let reader = new FileReader()
-            reader.onload = e => {
-                props.extractDataFunction(e.target.result.split(',')[1])
-                    .then(data => { setFileState(state => ({ ...state, ...data })) })
-            };
-            reader.onerror = (err) => console.log(err);
-            reader.readAsDataURL(file);
-            file.url = URL.createObjectURL(file);
-            setFileState(file);
+        if (!/image\/*|application\/pdf/.test(file.type)) {
+            console.log("The file type is not supported");
+            return;
         }
+
+        const fileType = (file.type === 'application/pdf') ? 'pdf' : 'image';
+
+        let reader = new FileReader()
+
+        reader.onload = evt => {
+            extractDataFunction(evt.target.result.split(',')[1], fileType)
+                .then(data => { setFileState(state => ({ ...state, ...data })) })
+        };
+        reader.onerror = (error) => console.log(error);
+        reader.readAsDataURL(file);
+        file.url = URL.createObjectURL(file);
+        setFileState(file);
     };
 
 
     return (
         <label style={{ position: 'relative', textAlign: 'center', borderStyle: 'dashed', borderRadius: '2em', margin: 'auto', padding: '1em' }}>
-            <Title>{props.title}</Title>
+            <Title>{title}</Title>
             {
                 (!fileState)
-                    ? <svg xmlns="http://www.w3.org/2000/svg" class="h-40 w-40" fill="none" viewBox="0 0 24 18" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    ? <svg xmlns="http://www.w3.org/2000/svg" className="h-40 w-40" fill="none" viewBox="0 0 24 18" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                     </svg>
                     : <>
                         <img src={fileState.url} alt={fileState.name} style={{ maxWidth: '100%', maxHeight: '300px ' }} />

@@ -43,17 +43,22 @@ class UserViewSet(viewsets.GenericViewSet):
     def updateUser(self, request):
         user = User.objects.get(username=request.data['username'])
         oldData = UserModelSerializer(user).data
-        request.data['password'] = oldData['password']
-        request.data['is_staff'] = oldData['is_staff']
-        serializer = UserModelSerializer(user, data=request.data, partial=True)
+        newData = request.data.copy()
+        newData['password'] = oldData['password']
+        newData['is_staff'] = oldData['is_staff']
+        if (request.data['password'] != ''):
+            user.set_password(request.data['password'])
+            newData['password'] = UserModelSerializer(user).data['password']
+            
+        serializer = UserModelSerializer(user, data=newData, partial=True)
 
         if serializer.is_valid():
             user = serializer.save()
             return Response({
-                'username': request.data['username'],
-                'first_name': request.data['first_name'],
-                'last_name': request.data['last_name'],
-                'email': request.data['email']
+                'username': newData['username'],
+                'first_name': newData['first_name'],
+                'last_name': newData['last_name'],
+                'email': newData['email']
             },status=status.HTTP_200_OK)
         
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -71,7 +76,7 @@ def getFullName(request, username):
 
 
 @api_view(['GET'])
-def getFullName(request, userId):
+def getUserById(request, userId):
     modelUser = User.objects.get(id=userId)
     user = UserModelSerializer(modelUser).data
     userData = {

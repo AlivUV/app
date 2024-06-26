@@ -6,22 +6,28 @@ import 'styles/styles.css';
 import 'styles/customStyles.css';
 
 // components import
+import LandingPage from 'pages/LandingPage/LandingPage';
 import Home from 'pages/Home';
 import SignIn from 'pages/SignIn'
 import SignUp from 'pages/SignUp'
+import Applicant from 'pages/Applicant'
 //import RequireAuth from 'components/RequireAuth';
+
 import reportWebVitals from 'reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
+      {/* Landing Page */}
+      <Route exact path='/' element={<LandingPage />}></Route>
       {/* Authentication */}
       <Route exact path="/login" element={<SignIn />}></Route>
       <Route exact path="/signup" element={<SignUp />}></Route>
-
       {/* User */}
-      <Route exact path="/" element={/*<RequireAuth>*/<Home />/*</RequireAuth>*/}></Route>
+      <Route exact path="/home" element={<Home />}></Route>
+      {/* Applicant */}
+      <Route exact path="/applicant" element={<Applicant />}></Route>
     </Routes>
   </BrowserRouter>
 );

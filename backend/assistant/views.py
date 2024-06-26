@@ -4,6 +4,7 @@ import json
 import base64
 import environ
 from PIL import Image
+import pypdfium2 as pdfium
 from rest_framework import status
 import google.generativeai as genai
 from rest_framework.response import Response
@@ -30,17 +31,39 @@ def get_env(key, default=None):
 def geminiImage(request):
     body = json.loads(request.body.decode('utf-8'))
 
-    body['image'] = base64.b64decode(body['image'])
+    body['file'] = base64.b64decode(body['file'])
 
-    body['image'] = Image.open(io.BytesIO(body['image']))
+    if (body['fileType'] == 'image'):
+        body['file'] = Image.open(io.BytesIO(body['file']))
+    else:
+        pdf = pdfium.PdfDocument(body['file'])
+        
+        pages = []
+
+        for i in range(len(pdf)):
+
+            page = pdf.get_page(i)
+
+            page = page.render(
+                scale=1,
+                rotation=0
+            )
+            page = page.to_pil()
+            page.save(f"image.png")
+
+            pages.append(page)
+        
+        body['file'] = pages
 
     genai.configure(api_key = get_env("GEMINI_API_KEY"))
 
     model = genai.GenerativeModel('gemini-pro-vision')
 
-    response = model.generate_content([
-        body['prompt'],
-        body['image']], stream=True)
+    prompt = [body['prompt']]
+    prompt.extend(body['file'])
+
+
+    response = model.generate_content(prompt, stream=True)
     response.resolve()
 
     responseData = response.text.split('```')

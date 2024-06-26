@@ -30,10 +30,18 @@ export const register = (data) => {
             'password_confirmation': String(data.passwordConfirmation)
         })
     })
+        .then(response => ({ status: response.status }))
+        .catch(error => console.error(error.message))
 }
 
-export const getFullName = async (personalId) => {
-    return await fetch(`${API_URL}/user/firstName/${personalId}`, {
+export const getFullName = async (username) => {
+    return await fetch(`${API_URL}/user/get/firstName/${username}`, {
+        method: "GET",
+    }).then(response => response.json())
+}
+
+export const getUserById = async (personalId) => {
+    return await fetch(`${API_URL}/user/get/userById/${personalId}`, {
         method: "GET",
     }).then(response => response.json())
 }

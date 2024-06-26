@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react';
 // MUI components
 import { CssBaseline, Box, Toolbar, Container, Grid, Paper } from '@mui/material';
 
+// Power BI tokens
+import { EMBED_URL } from 'utils';
+
 // Custom components
 import { AppBar } from 'components/Home/AppBar';
 import { Drawer } from 'components/Home/Drawer';
-import { DropZone } from 'components/Home/DropZone';
+import { DropZone } from 'components/DropZone';
 import { StudentsList } from 'components/Home/StudentsList';
 
 // Services
@@ -55,6 +58,7 @@ function Home() {
             >
                 <Toolbar />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+                    <iframe title="PowerBI" width="100%" height={window.innerHeight} src={EMBED_URL} ></iframe>
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={12} lg={6}>
                             <Paper sx={{ position: 'relative', textAlign: 'center', margin: 'auto', padding: '1em' }} >

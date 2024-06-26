@@ -14,6 +14,6 @@ router.register(r'users', views.UserViewSet, basename='users')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('user/get/firstName/<str:username>', views.getFullName, name='getFullName'),
-    path('user/get/byId/<str:userId>', views.getFullName, name='getFullName')
+    path('user/get/userById/<str:userId>', views.getUserById, name='getFullName'),
+    path('user/get/firstName/<str:username>', views.getFullName, name='getFullName')
 ]
