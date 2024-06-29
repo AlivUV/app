@@ -2,6 +2,7 @@
 from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from rest_framework import status, viewsets
+from django.db import transaction
 
 # Models
 from .models import Applicant
@@ -16,7 +17,7 @@ class ApplicantViewSet(viewsets.GenericViewSet):
     serializer_class = ApplicantModelSerializer
 
     @action(detail=False, methods=['post'])
-    def register(self, request):
+    def addApplicant(self, request):
         """Tries to create a row in the database and returns the result"""
         serializer = ApplicantModelSerializer(data=request.data)
 
@@ -27,9 +28,45 @@ class ApplicantViewSet(viewsets.GenericViewSet):
             data = ApplicantModelSerializer(applicant).data.copy()
             del data['id']
             del data['user_id']
-            return Response(serializer.data,status=status.HTTP_201_CREATED)
+            return Response(data,status=status.HTTP_201_CREATED)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=False, methods=['post'])
+    def createApplicantUser(self, request):
+        """Tries to create a row in the database and returns the result"""
+        if request.data['password'] != request.data['password_confirmation']:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        userSerializer = UserModelSerializer(data=request.data)
+
+        try:
+            with transaction.atomic():
+                if not userSerializer.is_valid():
+                    raise Exception('User not valid')
+
+                user = userSerializer.save()
+                print('User Created')
+                data = UserModelSerializer(user).data.copy()
+
+                request.data['user_id'] = data['id']
+                applicantSerializer = ApplicantModelSerializer(data=request.data)
+
+                if not applicantSerializer.is_valid():
+                    raise Exception('Applicant not valid')
+                
+                applicant = applicantSerializer.save()
+                data = {**data, **ApplicantModelSerializer(applicant).data.copy()}
+                del data['id']
+                del data['user_id']
+                del data['password']
+                return Response(data,status=status.HTTP_201_CREATED)
+        except Exception as e:
+            print(e)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+
+        
 
 
 @api_view(['GET'])
@@ -54,8 +91,4 @@ def getAllApplicants(request):
         del userData['id']
 
         allApplicants.append(userData)
-    # applicantData = {
-    #     'firstName': applicant['first_name'],
-    #     'lastName': applicant['last_name']
-    # }
     return Response(allApplicants, status=status.HTTP_200_OK)

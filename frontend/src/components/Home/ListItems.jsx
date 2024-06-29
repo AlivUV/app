@@ -1,22 +1,29 @@
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
+// MUI components
+import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { BarChart, People } from '@mui/icons-material';
 
-export const mainListItems = (
-  <>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
-  </>
-);
+function ListItems({ changeTab }) {
+  const handleClick = event => {
+    changeTab(event.currentTarget.id);
+  }
+
+  return (
+    <List>
+      <ListItemButton id='reports' onClick={handleClick}>
+        <ListItemIcon>
+          <BarChart />
+        </ListItemIcon>
+        <ListItemText primary="Reports" />
+      </ListItemButton>
+      <ListItemButton id='users' onClick={handleClick}>
+        <ListItemIcon>
+          <People />
+        </ListItemIcon>
+        <ListItemText primary="Customers" />
+      </ListItemButton>
+    </List>
+  )
+}
+
+export { ListItems }
+export default ListItems;

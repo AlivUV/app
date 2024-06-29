@@ -15,6 +15,7 @@ import Applicant from 'pages/Applicant'
 
 import reportWebVitals from 'reportWebVitals';
 
+document.title = 'DataExtract AI';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>

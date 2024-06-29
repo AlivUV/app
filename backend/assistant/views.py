@@ -33,9 +33,14 @@ def geminiImage(request):
 
     body['file'] = base64.b64decode(body['file'])
 
+    prompt = [body['prompt']]
+
     if (body['fileType'] == 'image'):
         body['file'] = Image.open(io.BytesIO(body['file']))
+
+        prompt.append(body['file'])
     else:
+        print('pdf')
         pdf = pdfium.PdfDocument(body['file'])
         
         pages = []
@@ -55,13 +60,11 @@ def geminiImage(request):
         
         body['file'] = pages
 
+        prompt.extend(body['file'])
+
     genai.configure(api_key = get_env("GEMINI_API_KEY"))
 
     model = genai.GenerativeModel('gemini-pro-vision')
-
-    prompt = [body['prompt']]
-    prompt.extend(body['file'])
-
 
     response = model.generate_content(prompt, stream=True)
     response.resolve()

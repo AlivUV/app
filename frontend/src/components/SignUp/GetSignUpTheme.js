@@ -165,34 +165,37 @@ const getDesignTokens = (mode) => ({
       lineHeight: 1.5,
     },
     h5: {
-      fontSize: 20,
+      fontSize: 24,
       fontWeight: 600,
     },
     h6: {
-      fontSize: 18,
+      fontSize: 20,
+    },
+    h7: {
+      fontSize: 14,
     },
     subtitle1: {
-      fontSize: 18,
+      fontSize: 20,
     },
     subtitle2: {
-      fontSize: 16,
+      fontSize: 20,
     },
     body1: {
       fontWeight: 400,
-      fontSize: 15,
+      fontSize: 17,
     },
     body2: {
       fontWeight: 400,
-      fontSize: 14,
+      fontSize: 16,
     },
     caption: {
       fontWeight: 400,
-      fontSize: 12,
+      fontSize: 14,
     },
   },
 });
 
-export default function GetSignUpTheme(mode) {
+function GetSignUpTheme(mode) {
   return {
     ...getDesignTokens(mode),
     components: {
@@ -632,3 +635,6 @@ export default function GetSignUpTheme(mode) {
     },
   };
 }
+
+export { GetSignUpTheme };
+export default GetSignUpTheme;

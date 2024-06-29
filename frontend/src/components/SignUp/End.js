@@ -1,9 +1,10 @@
-import * as React from 'react';
+import { useState } from 'react';
 
 import FormLabel from '@mui/material/FormLabel';
 import Grid from '@mui/material/Grid';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { styled } from '@mui/system';
+
 
 const FormGrid = styled(Grid)(() => ({
   display: 'flex',
@@ -11,10 +12,9 @@ const FormGrid = styled(Grid)(() => ({
 }));
 
 
+function End() {
 
-export default function End() {
-
-  const [inscription, setInscription] = React.useState('');
+  const [inscription, setInscription] = useState('');
 
   const handleChange = (event) => {
     setInscription(event.target.value);
@@ -63,3 +63,6 @@ export default function End() {
     </Grid>
   );
 }
+
+export { End };
+export default End;

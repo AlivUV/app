@@ -1,16 +1,15 @@
-import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
+import { Avatar, Box, Button, CssBaseline, Grid, Link, Paper, TextField, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import { LockOutlined, ArrowBackOutlined } from '@mui/icons-material';
+
+import GetSignUpTheme from 'components/SignUp/GetSignUpTheme';
+
+import { login } from "services/UserService"
+
 
 function Copyright(props) {
   return (
@@ -27,20 +26,47 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-const defaultTheme = createTheme();
+const checkoutTheme = createTheme(GetSignUpTheme('light'));;
 
 export default function SignIn() {
+  const [, setStatus] = useState(0);
+
+  let navigate = useNavigate();
+
+  const signin = async (userData) => {
+    setStatus(1);
+    login(userData)
+      .then(res => res.json())
+      .then(credentials => {
+        if (credentials.access_token) {
+          sessionStorage.setItem('userToken', credentials.access_token)
+          sessionStorage.setItem('username', credentials.user.username)
+          sessionStorage.setItem('userId', credentials.user.id)
+          sessionStorage.setItem('staff', credentials.user.is_staff)
+          if (credentials.user.is_staff)
+            navigate('/home')
+          else
+            navigate('/applicant')
+        } else {
+          setStatus(-1)
+        }
+      })
+      .catch(err => { setStatus(-2) })
+  }
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    let data = new FormData(event.currentTarget);
+
+    data = {
+      personalId: data.get('personalId'),
+      password: data.get('password')
+    }
+
+    signin(data)
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={checkoutTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -55,8 +81,39 @@ export default function SignIn() {
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            alignItems: 'start',
+            pt: 4,
+            px: 10,
+            gap: 4,
           }}
-        />
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'end',
+              height: 150,
+            }}
+          >
+            <Button
+              style={{
+                backgroundColor: 'rgba(0, 125, 255, .7)'
+              }}
+              startIcon={<ArrowBackOutlined />}
+              color='primary'
+              variant="text"
+              component="a"
+              href="/"
+              sx={{
+                ml: '-40px',
+                color: 'white',
+              }}
+
+            >
+              Regresar al inicio
+
+            </Button>
+          </Box>
+        </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -68,7 +125,7 @@ export default function SignIn() {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: '#7FADE8' }}>
-              <LockOutlinedIcon />
+              <LockOutlined />
             </Avatar>
             <Typography component="h1" variant="h5">
               Iniciar sesión
@@ -78,9 +135,9 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                id="identificacion"
+                id="personalId"
+                name="personalId"
                 label="Número de identificación"
-                name="Identificación"
                 autoComplete="identificacion"
                 autoFocus
               />
@@ -88,10 +145,10 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                name="contraseña"
-                label="Contraseña"
+                id="password"
+                name="password"
                 type="password"
-                id="contraseña"
+                label="Contraseña"
                 autoComplete="current-password"
               />
 
@@ -107,7 +164,7 @@ export default function SignIn() {
 
                 <Grid item>
                   <Link href="/signup" variant="body2">
-                    {"¿No tienes una cuenta? Registrate"}
+                    {"¿Quieres aplicar como estudiante? Registrate con nosotros"}
                   </Link>
                 </Grid>
               </Grid>

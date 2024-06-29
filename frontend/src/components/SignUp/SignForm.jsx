@@ -127,5 +127,5 @@ function SignForm({ dataState, handleSubmit, children }) {
     )
 }
 
-export default SignForm;
 export { SignForm };
+export default SignForm;

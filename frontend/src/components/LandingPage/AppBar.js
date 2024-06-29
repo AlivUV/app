@@ -184,10 +184,10 @@ function AppAppBar() {
                       color="primary"
                       variant="contained"
                       component="a"
-                      target="_blank"
+                      href="/signup"
                       sx={{ width: '100%' }}
                     >
-                      Registrarse
+                      Registrarse como estudiante
                     </Button>
                   </MenuItem>
                   <MenuItem>
@@ -195,11 +195,10 @@ function AppAppBar() {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      href="/material-ui/getting-started/templates/sign-in/"
-                      target="_blank"
+                      href="/login"
                       sx={{ width: '100%' }}
                     >
-                      Iniciar sesión
+                      Ingresar como administrativo
                     </Button>
                   </MenuItem>
                 </Box>

@@ -1,10 +1,10 @@
 // MUI components
-import { Toolbar, List, Divider, IconButton, Drawer as MuiDrawer } from '@mui/material';
+import { Toolbar, Divider, IconButton, Drawer as MuiDrawer } from '@mui/material';
 import { ChevronLeft as ChevronLeftIcon } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
 // Custom components
-import { mainListItems } from 'components/Home/ListItems';
+import { ListItems } from 'components/Home/ListItems';
 
 
 const drawerWidth = 240;
@@ -37,16 +37,14 @@ const DrawerStyled = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== '
 );
 
 
-function Drawer(props) {
+function Drawer({ changeTab, open, toggleDrawer, variant }) {
     return (
-        <DrawerStyled variant={props.variant} open={props.open}>
+        <DrawerStyled variant={variant} open={open}>
             <Toolbar sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', px: [1] }} >
-                <IconButton onClick={props.toggleDrawer}> <ChevronLeftIcon /> </IconButton>
+                <IconButton onClick={toggleDrawer}> <ChevronLeftIcon /> </IconButton>
             </Toolbar>
             <Divider />
-            <List component="nav">
-                {mainListItems}
-            </List>
+            <ListItems changeTab={changeTab} />
         </DrawerStyled>
     )
 }

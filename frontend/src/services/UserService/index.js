@@ -2,6 +2,18 @@ import {
     API_URL
 } from 'utils';
 
+
+/**
+ * Login to the API with a username and password.
+ *
+ * @param {object} data - An object containing the personal ID and password.
+ * @param {string} data.personalId - The personal ID to login with.
+ * @param {string} data.password - The password to login with.
+ * @returns {Promise} A promise resolving to the API response.
+ *
+ * @example
+ * login({ personalId: '1234567890', password: 'ysecretpassword' })
+ */
 export const login = (data) => {
     return fetch(`${API_URL}/users/login/`, {
         method: "POST",
@@ -15,6 +27,29 @@ export const login = (data) => {
     })
 }
 
+
+/**
+ * Register a new user with the API.
+ *
+ * @param {object} data - An object containing the registration data.
+ * @param {string} data.personalId - The personal ID to register with.
+ * @param {string} data.firstName - The first name of the user.
+ * @param {string} data.lastName - The last name of the user.
+ * @param {string} data.email - The email address of the user.
+ * @param {string} data.password - The password to register with.
+ * @param {string} data.passwordConfirmation - The password confirmation.
+ * @returns {Promise} A promise resolving to an object with a status property.
+ *
+ * @example
+ * register({
+ *   personalId: '1234567890',
+ *   firstName: 'John',
+ *   lastName: 'Doe',
+ *   email: 'johndoe@example.com',
+ *   password: 'ysecretpassword',
+ *   passwordConfirmation: 'ysecretpassword'
+ * })
+ */
 export const register = (data) => {
     return fetch(`${API_URL}/users/signup/`, {
         method: 'POST',
@@ -34,12 +69,32 @@ export const register = (data) => {
         .catch(error => console.error(error.message))
 }
 
+
+/**
+ * Get the full name of a user by their username.
+ *
+ * @param {string} username - The username to retrieve the full name for.
+ * @returns {Promise} A promise resolving to the full name of the user.
+ *
+ * @example
+ * getFullName('johndoe').then(fullName => console.log(fullName))
+ */
 export const getFullName = async (username) => {
     return await fetch(`${API_URL}/user/get/firstName/${username}`, {
         method: "GET",
     }).then(response => response.json())
 }
 
+
+/**
+ * Get a user by their personal ID.
+ *
+ * @param {string} personalId - The personal ID to retrieve the user for.
+ * @returns {Promise} A promise resolving to the user object.
+ *
+ * @example
+ * getUserById('1234567890').then(user => console.log(user))
+ */
 export const getUserById = async (personalId) => {
     return await fetch(`${API_URL}/user/get/userById/${personalId}`, {
         method: "GET",

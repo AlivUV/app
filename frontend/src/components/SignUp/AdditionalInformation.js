@@ -1,6 +1,3 @@
-import * as React from 'react';
-
-
 import Box from '@mui/material/Box';
 import FormLabel from '@mui/material/FormLabel';
 import Grid from '@mui/material/Grid';
@@ -10,78 +7,70 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+
 const FormGrid = styled(Grid)(() => ({
   display: 'flex',
   flexDirection: 'column',
 }));
 
 
+function AdditionalInformation({ dataState }) {
 
-export default function AdditionalInformation() {
-
-  const [inscription, setInscription] = React.useState('');
+  const [data, setData] = dataState;
 
   const handleChange = (event) => {
-    setInscription(event.target.value);
+    setData(data => ({
+      ...data,
+      [event.target.id || event.target.name]: event.target.value
+    }));
   };
 
 
   return (
     <Grid container spacing={3}>
-      <FormGrid item xs={12} md={6}>
-        <FormLabel htmlFor="first-name" required>
-          Nombres
+      <FormGrid item xs={12}>
+        <FormLabel htmlFor="highSchool" required>
+          Colegio
         </FormLabel>
         <OutlinedInput
-          id="nombre"
-          name="Nombre"
-          type="name"
-          placeholder="John"
-          autoComplete="Nombre"
           required
-          disabled
-        />
-      </FormGrid>
-      <FormGrid item xs={12} md={6}>
-        <FormLabel htmlFor="last-name" required>
-          Apellidos
-        </FormLabel>
-        <OutlinedInput
-          id="apellidos"
-          name="Apellidos"
-          type="last-name"
-          placeholder="Snow"
-          autoComplete="Apellidos"
-          required
-          disabled
+          id="highSchool"
+          name="highSchool"
+          type="text"
+          placeholder="Institución Educativa Ejemplo"
+          value={data.highSchool}
+          onChange={handleChange}
         />
       </FormGrid>
       <FormGrid item xs={12}>
-        <FormLabel htmlFor="address1" required>
+        <FormLabel htmlFor="address" required>
           Dirección de residencia
         </FormLabel>
         <OutlinedInput
-          id="direccion"
+          required
+          id="address"
           name="direccion"
           type="address1"
-          placeholder="1234 Elm Street, Apt 5B, Springfield, IL 62704"
+          placeholder="Calle 10 # 10 - 10"
           autoComplete="shipping address-line1"
-          required
+          value={data.address}
+          onChange={handleChange}
         />
       </FormGrid>
       <FormGrid item xs={12}>
-        <FormLabel htmlFor="address2">Número de teléfono</FormLabel>
+        <FormLabel htmlFor="phone">Número de teléfono</FormLabel>
         <OutlinedInput
-          id="telefono"
-          name="telefono"
-          type="address2"
-          placeholder="(123) 456-7890"
-          autoComplete="telefono"
           required
+          id="phone"
+          name="telefono"
+          placeholder="3012345678"
+          autoComplete="telefono"
+          value={data.phone}
+          onChange={handleChange}
         />
       </FormGrid>
       <FormGrid item xs={6}>
-        <FormLabel htmlFor="city" required>
+        <FormLabel htmlFor="inscriptionType" required>
           Tipo de inscripción
         </FormLabel>
         <Box sx={{ minWidth: 120 }}>
@@ -89,32 +78,81 @@ export default function AdditionalInformation() {
 
             <Select
               labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={inscription}
+              id="inscriptionType"
+              name="inscriptionType"
+              value={data.inscriptionType}
               label="Age"
               onChange={handleChange}
             >
-              <MenuItem value={10}>Pregrado Cali</MenuItem>
-              <MenuItem value={20}>Pregrado sedes</MenuItem>
-              <MenuItem value={30}>Auxiliares salud oral</MenuItem>
-              <MenuItem value={40}>Internado rotatorio</MenuItem>
+              <MenuItem value={'Pregrado Cali'}>Pregrado Cali</MenuItem>
+              <MenuItem value={'Pregrado sedes'}>Pregrado sedes</MenuItem>
+              <MenuItem value={'Auxiliares salud oral'}>Auxiliares salud oral</MenuItem>
+              <MenuItem value={'Internado rotatorio'}>Internado rotatorio</MenuItem>
             </Select>
           </FormControl>
         </Box>
       </FormGrid>
       <FormGrid item xs={6}>
-        <FormLabel htmlFor="state" required>
+        <FormLabel htmlFor="program" required>
           Programa académico
         </FormLabel>
         <OutlinedInput
-          id="programa"
+          required
+          id="program"
           name="programa"
           type="state"
           placeholder="Ingeniería de sistemas"
           autoComplete="Ingenieria"
+          value={data.program}
+          onChange={handleChange}
+        />
+      </FormGrid>
+      <FormGrid item xs={12}>
+        <FormLabel htmlFor="email" required>
+          Correo electrónico
+        </FormLabel>
+        <OutlinedInput
           required
+          id="email"
+          name="correo"
+          type="address1"
+          placeholder="nombre.apellido@ejemplo.com"
+          autoComplete="correo"
+          value={data.email}
+          onChange={handleChange}
+        />
+      </FormGrid>
+      <FormGrid item xs={12}>
+        <FormLabel htmlFor="password">Contraseña</FormLabel>
+        <OutlinedInput
+          required
+          id="password"
+          name="contraseña"
+          type="password"
+          placeholder="xxxxxxxx"
+          autoComplete="contraseña"
+          value={data.password}
+          onChange={handleChange}
+        />
+      </FormGrid>
+      <FormGrid item xs={12}>
+        <FormLabel htmlFor="passwordConfirmation" required>
+          Confirmar contraseña
+        </FormLabel>
+        <OutlinedInput
+          required
+          id="passwordConfirmation"
+          name="confirmar"
+          type="password"
+          placeholder="xxxxxxxx"
+          autoComplete="confirmar contraseña"
+          value={data.passwordConfirmation}
+          onChange={handleChange}
         />
       </FormGrid>
     </Grid>
   );
 }
+
+export { AdditionalInformation };
+export default AdditionalInformation;
