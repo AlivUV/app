@@ -4,7 +4,7 @@ import { ChevronLeft as ChevronLeftIcon, ExitToApp as ExitToAppIcon } from '@mui
 import { styled } from '@mui/material/styles';
 
 // Custom components
-import { mainListItems } from 'components/Home/ListItems';
+import { mainListItems } from 'components/Dashboard/ListItems';
 
 const drawerWidth = 240;
 

@@ -15,7 +15,7 @@ const FormGrid = styled(Grid)(() => ({
 }));
 
 
-export default function AdditionalInformation() {
+export default function PersonalInformation() {
 
   const [inscription, setInscription] = React.useState('');
 
@@ -25,6 +25,18 @@ export default function AdditionalInformation() {
 
   return (
     <Grid container spacing={3}>
+      <FormGrid item xs={12}>
+        <FormLabel htmlFor="identificacion" required>
+          Número de identificación
+        </FormLabel>
+        <OutlinedInput
+          id="identificacion"
+          name="identificacion"
+          placeholder="xxxxxxx"
+          autoComplete="Numero de identificacion"
+          required
+        />
+      </FormGrid>
       <FormGrid item xs={12} md={6}>
         <FormLabel htmlFor="first-name" required>
           Nombres
@@ -36,7 +48,6 @@ export default function AdditionalInformation() {
           placeholder="John"
           autoComplete="Nombre"
           required
-          disabled
         />
       </FormGrid>
       <FormGrid item xs={12} md={6}>
@@ -50,7 +61,6 @@ export default function AdditionalInformation() {
           placeholder="Snow"
           autoComplete="Apellidos"
           required
-          disabled
         />
       </FormGrid>
       <FormGrid item xs={12}>
@@ -77,6 +87,18 @@ export default function AdditionalInformation() {
           required
         />
       </FormGrid>
+      <FormGrid item xs={12}>
+        <FormLabel htmlFor="correo" required>
+          Correo electrónico
+        </FormLabel>
+        <OutlinedInput
+          id="correo"
+          name="correo"
+          placeholder="nombre.apellido@ejemplo.com"
+          autoComplete="correo"
+          required
+        />
+      </FormGrid>
       <FormGrid item xs={6}>
         <FormLabel htmlFor="city" required>
           Tipo de inscripción
@@ -100,7 +122,7 @@ export default function AdditionalInformation() {
         </Box>
       </FormGrid>
       <FormGrid item xs={6}>
-        <FormLabel htmlFor="state" required>
+        <FormLabel htmlFor="state" >
           Programa académico
         </FormLabel>
         <OutlinedInput

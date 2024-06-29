@@ -12,7 +12,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import RadioGroup from '@mui/material/RadioGroup';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import DropZone from './Home/DropZone';
+import DropZone from './Dashboard/DropZone';
 
 import BadgeRoundedIcon from '@mui/icons-material/BadgeRounded';
 import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';

@@ -6,7 +6,7 @@ import 'styles/styles.css';
 import 'styles/customStyles.css';
 
 // components import
-import Home from 'components/Home';
+import Dashboard from 'components/Dashboard';
 import LandingPage from 'pages/LandingPage';
 import SignUp from 'pages/SignUp';
 import SignIn from 'pages/SignIn';
@@ -20,7 +20,7 @@ root.render(
       {/* Authentication */}
       <Route exact path="/login" element={<SignIn />}></Route>
       <Route exact path="/signup" element={<SignUp />}></Route>
-      <Route exact path="/dashboard" element={<Home />}></Route>
+      <Route exact path="/dashboard" element={<Dashboard />}></Route>
 
       {/* User */}
       <Route exact path="/" element={/*<RequireAuth>*/<LandingPage />/*</RequireAuth>*/}></Route>

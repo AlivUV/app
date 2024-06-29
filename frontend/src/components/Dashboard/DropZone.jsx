@@ -1,4 +1,4 @@
-import { Title } from 'components/Home/Title'
+import { Title } from 'components/Dashboard/Title'
 
 function DropZone(props) {
     const [fileState, setFileState] = props.fileState;

@@ -5,13 +5,13 @@ import { useState } from 'react';
 import { CssBaseline, Box, Toolbar, Container, Grid, Paper } from '@mui/material';
 
 // Custom components
-import { AppBar } from 'components/Home/AppBar';
-import { Drawer } from 'components/Home/Drawer';
-import { StudentsList } from 'components/Home/StudentsList';
+import { AppBar } from 'components/Dashboard/AppBar';
+import { Drawer } from 'components/Dashboard/Drawer';
 import AdminRegistration from 'components/AdminRegistration';
+import StudentsTable from './Students';
 
 
-function Home() {
+function Dashboard() {
     const [open, setOpen] = useState(false);
     const [idFile, setIdFile] = useState();
     const [icfesFile, setIcfesFile] = useState();
@@ -23,7 +23,7 @@ function Home() {
     const renderContent = () => {
         switch (currentContent) {
             case 'StudentsList':
-                return <StudentsList />;
+                return <StudentsTable />;
             case 'AdminRegistration':
             default:
                 return <AdminRegistration />;
@@ -54,5 +54,5 @@ function Home() {
     );
 }
 
-export default Home;
-export { Home };
+export default Dashboard;
+export { Dashboard };

@@ -8,7 +8,7 @@ import { LockOutlined as LockOutlinedIcon } from '@mui/icons-material';
 import { Avatar, Button, CssBaseline, TextField, Link, Grid, Box, Typography, Container } from '@mui/material';
 
 // Components
-import { DropZone } from 'components/Home/DropZone';
+import { DropZone } from 'components/Dashboard/DropZone';
 
 // Services
 import { register } from 'services/UserService';
