@@ -10,11 +10,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 // Custom Components
 import { AdditionalInformation, GetSignUpTheme, SuccessfulSignUp, ToggleColorMode, UploadDocuments } from 'components/SignUp';
 
+// Services
+import { register } from 'services/ApplicantService';
+
 
 const steps = ['Sube tus documentos', 'Información adicional'];
 
 
-export default function SignUp() {
+function SignUp() {
   const [mode, setMode] = useState('light');
   const [showCustomTheme,] = useState(true);
   const checkoutTheme = createTheme(GetSignUpTheme(mode));
@@ -53,7 +56,13 @@ export default function SignUp() {
   };
 
   const handleSubmit = () => {
-    console.log(userData);
+    register(userData)
+      .then((status) => {
+        if (status === 201) {
+          handleNext();
+        }
+      })
+      .catch((error) => { console.error(error.message) });
   }
 
   return (
@@ -289,3 +298,6 @@ export default function SignUp() {
     </ThemeProvider>
   );
 }
+
+export { SignUp };
+export default SignUp;

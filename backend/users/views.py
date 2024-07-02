@@ -12,12 +12,25 @@ from django.contrib.auth.models import User
 
 
 class UserViewSet(viewsets.GenericViewSet):
+    """
+    ViewSet for user management.
 
+    This ViewSet provides endpoints for user login, signup, and update.
+    """
     queryset = User.objects.filter(is_active=True)
     serializer_class = UserModelSerializer
 
     @action(detail=False, methods=['post'])
     def login(self, request):
+        """
+        Creates a token to login an user.
+
+        Args:
+            request (Request): Request object containing username and password.
+
+        Returns:
+            Response: Response object containing user data and access token.
+        """
         serializer = UserLoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user, token = serializer.save()
@@ -31,8 +44,15 @@ class UserViewSet(viewsets.GenericViewSet):
 
     @action(detail=False, methods=['post'])
     def signup(self, request):
-        print(request.data)
+        """
+        Tries to create a row in the database and returns the result.
 
+        Args:
+            request (Request): Request object containing user data.
+
+        Returns:
+            Response: Response object containing created user data.
+        """
         serializer = UserSignUpSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -41,6 +61,15 @@ class UserViewSet(viewsets.GenericViewSet):
     
     @action(detail=False, methods=['put'])
     def updateUser(self, request):
+        """
+        Update an existing user.
+
+        Args:
+            request (Request): Request object containing updated user data.
+
+        Returns:
+            Response: Response object containing updated user data.
+        """
         user = User.objects.get(username=request.data['username'])
         oldData = UserModelSerializer(user).data
         newData = request.data.copy()
@@ -66,6 +95,16 @@ class UserViewSet(viewsets.GenericViewSet):
 
 @api_view(['GET'])
 def getFullName(request, username):
+    """
+    Get full name of a user by username.
+
+    Args:
+        request (Request): Request object.
+        username (str): Username of the user.
+
+    Returns:
+        Response: Response object containing full name of the user.
+    """
     modelUser = User.objects.get(username=username)
     user = UserModelSerializer(modelUser).data
     userData = {
@@ -77,6 +116,16 @@ def getFullName(request, username):
 
 @api_view(['GET'])
 def getUserById(request, userId):
+    """
+    Get user data by user ID.
+
+    Args:
+        request (Request): Request object.
+        userId (int): ID of the user.
+
+    Returns:
+        Response: Response object containing user data.
+    """
     modelUser = User.objects.get(id=userId)
     user = UserModelSerializer(modelUser).data
     userData = {

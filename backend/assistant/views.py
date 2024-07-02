@@ -21,6 +21,16 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 env.read_env()
 
 def get_env(key, default=None):
+    """
+    Get an environment variable from the .env file or os.environ.
+
+    Args:
+        key (str): The key of the environment variable.
+        default: The default value to return if the key is not found.
+
+    Returns:
+        str: The value of the environment variable.
+    """
     try:
         return env(key)
     except ImproperlyConfigured:
@@ -29,6 +39,15 @@ def get_env(key, default=None):
 
 @api_view(['POST'])
 def geminiImage(request):
+    """
+    Process an image or PDF file and generate a response using the Gemini API.
+
+    Args:
+        request (Request): The HTTP request object.
+
+    Returns:
+        Response: A JSON response with the generated data.
+    """
     body = json.loads(request.body.decode('utf-8'))
 
     body['file'] = base64.b64decode(body['file'])

@@ -1,6 +1,6 @@
 // MUI components
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { BarChart, People } from '@mui/icons-material';
+import { BarChart, People, GroupAddRounded } from '@mui/icons-material';
 
 function ListItems({ changeTab }) {
   const handleClick = event => {
@@ -13,13 +13,19 @@ function ListItems({ changeTab }) {
         <ListItemIcon>
           <BarChart />
         </ListItemIcon>
-        <ListItemText primary="Reports" />
+        <ListItemText primary="Reportes" />
       </ListItemButton>
-      <ListItemButton id='users' onClick={handleClick}>
+      <ListItemButton id='adminRegistration' onClick={handleClick}>
+        <ListItemIcon>
+          <GroupAddRounded />
+        </ListItemIcon>
+        <ListItemText primary="Registrar usuario" />
+      </ListItemButton>
+      <ListItemButton id='studentsList' onClick={handleClick}>
         <ListItemIcon>
           <People />
         </ListItemIcon>
-        <ListItemText primary="Customers" />
+        <ListItemText primary="Usuarios registrados" />
       </ListItemButton>
     </List>
   )

@@ -8,7 +8,7 @@ import { LockOutlined, ArrowBackOutlined } from '@mui/icons-material';
 
 import GetSignUpTheme from 'components/SignUp/GetSignUpTheme';
 
-import { login } from "services/UserService"
+import { login, createSession } from "services/UserService"
 
 
 function Copyright(props) {
@@ -24,11 +24,11 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const checkoutTheme = createTheme(GetSignUpTheme('light'));;
 
-export default function SignIn() {
+
+function SignIn() {
   const [, setStatus] = useState(0);
 
   let navigate = useNavigate();
@@ -36,20 +36,15 @@ export default function SignIn() {
   const signin = async (userData) => {
     setStatus(1);
     login(userData)
-      .then(res => res.json())
       .then(credentials => {
         if (credentials.access_token) {
-          sessionStorage.setItem('userToken', credentials.access_token)
-          sessionStorage.setItem('username', credentials.user.username)
-          sessionStorage.setItem('userId', credentials.user.id)
-          sessionStorage.setItem('staff', credentials.user.is_staff)
+          createSession(credentials);
           if (credentials.user.is_staff)
-            navigate('/home')
+            navigate('/home');
           else
-            navigate('/applicant')
-        } else {
-          setStatus(-1)
-        }
+            navigate('/applicant');
+        } else
+          setStatus(-1);
       })
       .catch(err => { setStatus(-2) })
   }
@@ -176,3 +171,6 @@ export default function SignIn() {
     </ThemeProvider>
   );
 }
+
+export { SignIn };
+export default SignIn;

@@ -8,6 +8,6 @@ router.register(r'applicants', views.ApplicantViewSet, basename='applicants')
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('applicant/get/allApplicants', views.getAllApplicants, name='getAllApplicants'),
+    path('applicants/get/allApplicants', views.getAllApplicants, name='getAllApplicants'),
     path('applicant/get/applicantById/<str:applicantId>', views.getApplicant, name='getApplicant')
 ]

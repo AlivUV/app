@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import FormLabel from '@mui/material/FormLabel';
 import Grid from '@mui/material/Grid';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -13,13 +11,6 @@ const FormGrid = styled(Grid)(() => ({
 
 
 function End() {
-
-  const [inscription, setInscription] = useState('');
-
-  const handleChange = (event) => {
-    setInscription(event.target.value);
-  };
-
 
   return (
     <Grid container spacing={3}>

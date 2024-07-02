@@ -1,4 +1,4 @@
-import { Title } from 'components/Home/Title'
+import { Title } from 'components/Title'
 
 
 function DropZone({ propFileState, extractDataFunction, title }) {

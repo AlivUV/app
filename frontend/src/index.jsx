@@ -1,17 +1,23 @@
+// React imports
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+// Style imports
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'styles/styles.css';
 import 'styles/customStyles.css';
 
-// components import
-import LandingPage from 'pages/LandingPage/LandingPage';
-import Home from 'pages/Home';
-import SignIn from 'pages/SignIn'
-import SignUp from 'pages/SignUp'
-import Applicant from 'pages/Applicant'
-//import RequireAuth from 'components/RequireAuth';
+// Pages imports
+import { LandingPage } from 'pages/LandingPage/LandingPage';
+import { Dashboard } from 'pages/Dashboard';
+import { SignIn } from 'pages/SignIn'
+import { SignUp } from 'pages/SignUp'
+import { Applicant } from 'pages/Applicant'
+
+// Custom components
+import RequireAuth from 'components/RequireAuth';
+import RequireStaffAuth from 'components/RequireStaffAuth';
 
 import reportWebVitals from 'reportWebVitals';
 
@@ -26,9 +32,9 @@ root.render(
       <Route exact path="/login" element={<SignIn />}></Route>
       <Route exact path="/signup" element={<SignUp />}></Route>
       {/* User */}
-      <Route exact path="/home" element={<Home />}></Route>
+      <Route exact path="/home" element={<RequireStaffAuth><Dashboard /></RequireStaffAuth>}></Route>
       {/* Applicant */}
-      <Route exact path="/applicant" element={<Applicant />}></Route>
+      <Route exact path="/applicant" element={<RequireAuth><Applicant /></RequireAuth>}></Route>
     </Routes>
   </BrowserRouter>
 );

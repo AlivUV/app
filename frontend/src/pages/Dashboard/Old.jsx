@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { CssBaseline, Box, Toolbar, Container } from '@mui/material';
 
 // Custom components
-import { AppBar, Drawer, ReportsPanel, UsersPanel } from 'components/Home';
+import { AppBar, Drawer, ReportsPanel, UsersPanel } from 'components/Dashboard';
 
 
 function Home() {

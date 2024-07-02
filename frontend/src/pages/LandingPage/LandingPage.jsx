@@ -52,7 +52,7 @@ ToggleCustomTheme.propTypes = {
   toggleCustomTheme: PropTypes.func.isRequired,
 };
 
-export default function LandingPage() {
+function LandingPage() {
   const [mode, setMode] = React.useState('light');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
@@ -86,3 +86,6 @@ export default function LandingPage() {
     </ThemeProvider>
   );
 }
+
+export { LandingPage };
+export default LandingPage;

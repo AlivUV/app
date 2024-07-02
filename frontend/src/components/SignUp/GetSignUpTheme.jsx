@@ -172,7 +172,7 @@ const getDesignTokens = (mode) => ({
       fontSize: 20,
     },
     h7: {
-      fontSize: 14,
+      fontSize: 12,
     },
     subtitle1: {
       fontSize: 20,

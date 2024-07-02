@@ -1,15 +1,19 @@
-import * as React from 'react';
+// React imports
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
-import MenuItem from '@mui/material/MenuItem';
-import Drawer from '@mui/material/Drawer';
+// MUI components
+import { 
+  AppBar as MUIAppBar, 
+  Box,
+  Button,
+  Container,
+  Drawer,
+  Divider,
+  MenuItem,
+  Toolbar,
+  Typography
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const logoStyle = {
@@ -18,8 +22,8 @@ const logoStyle = {
   cursor: 'pointer',
 };
 
-function AppAppBar() {
-  const [open, setOpen] = React.useState(false);
+function AppBar() {
+  const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -41,7 +45,7 @@ function AppAppBar() {
 
   return (
     <div>
-      <AppBar
+      <MUIAppBar
         position="fixed"
         sx={{
           boxShadow: 0,
@@ -206,14 +210,15 @@ function AppAppBar() {
             </Box>
           </Toolbar>
         </Container>
-      </AppBar>
+      </MUIAppBar>
     </div>
   );
 }
 
-AppAppBar.propTypes = {
+AppBar.propTypes = {
   mode: PropTypes.oneOf(['dark', 'light']).isRequired,
   toggleColorMode: PropTypes.func.isRequired,
 };
 
-export default AppAppBar;
+export { AppBar };
+export default AppBar;

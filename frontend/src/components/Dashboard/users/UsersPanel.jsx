@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Grid, Paper } from '@mui/material';
 
 // Custom components
-import { StudentsList } from 'components/Home';
+import { StudentsTable } from 'components/Dashboard';
 import { DropZone } from 'components/DropZone';
 
 // Services
@@ -29,7 +29,7 @@ function UsersPanel() {
             </Grid>
             <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                    <StudentsList />
+                    <StudentsTable />
                 </Paper>
             </Grid>
         </Grid>

@@ -25,6 +25,8 @@ export const login = (data) => {
             "password": String(data.password),
         })
     })
+        .then(response => response.json())
+        .catch(error => console.error(error.message))
 }
 
 
@@ -82,7 +84,9 @@ export const register = (data) => {
 export const getFullName = async (username) => {
     return await fetch(`${API_URL}/user/get/firstName/${username}`, {
         method: "GET",
-    }).then(response => response.json())
+    })
+        .then(response => response.json())
+        .catch(error => console.error(error.message))
 }
 
 
@@ -98,5 +102,20 @@ export const getFullName = async (username) => {
 export const getUserById = async (personalId) => {
     return await fetch(`${API_URL}/user/get/userById/${personalId}`, {
         method: "GET",
-    }).then(response => response.json())
+    })
+        .then(response => response.json())
+        .catch(error => console.error(error.message))
+}
+
+
+export const createSession = (credentials) => {
+    sessionStorage.setItem('userToken', credentials.access_token)
+    sessionStorage.setItem('username', credentials.user.username)
+    sessionStorage.setItem('userId', credentials.user.id)
+    sessionStorage.setItem('staff', credentials.user.is_staff)
+}
+
+
+export const endSession = () => {
+    sessionStorage.clear()
 }

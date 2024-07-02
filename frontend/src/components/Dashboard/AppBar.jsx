@@ -46,7 +46,7 @@ function AppBar(props) {
                     <MenuIcon style={{ color: 'blue' }} />
                 </IconButton>
                 <Typography component="h1" variant="h6" color="common.white" noWrap sx={{ flexGrow: 1 }} >
-                    Dashboard
+                    Administrador
                 </Typography>
             </Toolbar>
         </AppBarStyled>
